@@ -5,11 +5,17 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/parent-microservice" />
+<<<<<<< HEAD
         <option name="gradleHome" value="$PROJECT_DIR$/../Program Files/gradle/gradle-8.10.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/parent-microservice" />
             <option value="$PROJECT_DIR$/parent-microservice/product-service" />
+=======
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/parent-microservice" />
+>>>>>>> 2ade360 (lk)
           </set>
         </option>
       </GradleProjectSettings>
