@@ -1,0 +1,51 @@
+services:
+
+#  postgres:
+#    image: postgres
+#    ports:
+#      - "5434:5432"
+#    container_name: postgres-inventory
+#    environment:
+#      POSTGRES_USER: admin
+#      POSTGRES_PASSWORD: password
+#      #POSTGRES_DB: inventory-service
+#      PGDATA: /data/postgres
+#    volumes:
+#      - ./data/inventory:/var/lib/postgresql/data    #the databse will persist data here on the host machine
+#      - ./init/inventory/init.sql:/docker-entrypoint-initdb.d/init.sql  #initialzie
+
+
+  postgres-inventory: #container 1  # dependant on container mongodb
+    image: postgres
+    ports:
+      - "5434:5432"
+    container_name: postgres-inventory-local  #container name HAS! to be unique when they are inside the same solution
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+     # - POSTGRES_DB=inventory-service
+    volumes: #mount (Also refered as map) a specific directory
+      - ./data/inventory:/var/lib/postgresql/data
+      - ./init/inventory/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+  postgres-order: #container 1  # dependant on container mongodb
+      image: postgres
+      ports:
+        - "5433:5432"
+      container_name: postgres-order-local  #container name HAS! to be unique when they are inside the same solution
+      environment:
+        - POSTGRES_USER=admin
+        - POSTGRES_PASSWORD=password
+      volumes: #mount (Also refered as map) a specific directory
+        - ./data/order:/var/lib/postgresql/data
+        - ./init/order/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8090:80"
+    container_name: pgadmin-single
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@domain.ca
+      - PGADMIN_DEFAULT_PASSWORD=password

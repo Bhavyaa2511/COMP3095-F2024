@@ -1,0 +1,22 @@
+services:
+
+  postgres-order:
+    image: postgres
+    ports:
+      - "5433:5432"
+    container_name: postgres-single
+    environment:
+        POSTGRES_USER: admin
+        POSTGRES_PASSWORD: password
+    volumes:
+      - ./data/orders:/var/lib/postgresql/data    #the databse will persist data here on the host machine
+      - ./init/order/init.sql:/docker-entrypoint-initdb.d/init.sql  #initialzie
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8080:80"
+    container_name: pgadmin-single
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@domain.ca
+      - PGADMIN_DEFAULT_PASSWORD=password
